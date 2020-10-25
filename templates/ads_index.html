@@ -1,0 +1,82 @@
+<script language="JavaScript" type="text/JavaScript">
+<!--
+	function CLA(CLA) { var MainWindow = window.open (CLA, "_blank","width=500,height=300,toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no");}
+//-->
+</script>
+<table cellspacing="1" class="outer" style="width:100%;">
+  <tr>
+    <th><{$add_from_sitename}> <{$add_from_title}> </th>
+  </tr>
+  <{if $moderated}>
+	  <{if $xoops_isadmin}>
+	  <tr>
+	    <td align="center" class="even">
+	    <table class="outer" cellspacing="0" style="width:50%;">
+		  <tr>
+		    <td class="head" align="center"><{$admin_block}></td>
+		  </tr>
+		  <tr>
+		    <td class="odd" align="center"><{$confirm_ads}></td>
+		  </tr>
+	   </table>
+	   </td>	
+	  </tr>
+	  <{/if}>
+  <{/if}>
+
+<tr>
+  	<td class="even" align="center">
+	<{$intro}><hr>
+	</td></tr><tr>
+		<td class="even" align="center">
+			<table border="0" style="width:90%;"><tr>
+					<form name='search' id='search' action='search.php' method='post' onsubmit='return xoopsFormValidate_search();'>
+					<input type='hidden' name='mids[]' value='<{$xmid}>'>
+					
+					<td><b><{$search_listings}></b></td>
+					<td><input type='text' name='query' id='query' size='15' maxlength='255' value=''></td>
+					<td><select  size='1' name='andor' id='andor'>
+					<option value='AND' selected='selected'><{$all_words}></option>
+					<option value='OR'><{$any_words}></option>
+					<option value='exact'><{$exact_match}></option>
+					</select></td>
+					<td><input type='submit' class='formButton' name='submit'  id='submit' value='<{$search}>'></td></tr>
+					<input type='hidden' name='action' id='action' value='results'>
+					</form>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+		<script type='text/javascript'>
+		<!--
+		function xoopsFormValidate_search(){}
+		//-->
+		</script>
+<table border="1" class="even" align="center">
+  <tr>
+  	<td class="odd">
+      <table border="0" style="width:100%;">
+		<{foreach item=cat from=$categories}>
+		<{math equation="i % 3" i=$cat.i assign="mod"}>
+			<{if $mod == 0}><tr><{/if}>
+			<td valign="top" align="center" style="width:33%;">
+			<table class="outer" cellspacing="0" style="width:100%;">
+			  <tr><td class="head"><{$cat.image}> <{$cat.link}> (<{$cat.count}>)</td></tr>
+			  <tr><td class="odd"><{$cat.subcat}></td></tr>
+			</table>
+			</td>
+			<{if $mod == 2 || $cat.i == $cat_count}></tr><{/if}>
+		<{/foreach}>
+      </table>
+    </td>
+  </tr>
+  <tr>
+  	<td class="even" align="center"><{$total_listing}><br><{$total_confirm}></td>
+  </tr>
+</table>
+<br><br>
+<{include file="db:ads_adlist.html" comment=$comment}>
+<{include file='db:system_notification_select.html'}>
+<br><br>
+

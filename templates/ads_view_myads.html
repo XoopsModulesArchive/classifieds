@@ -1,0 +1,74 @@
+
+
+<table cellspacing="1" class="outer" style="width:99%;">
+  <tr>
+    <td class="odd" align="left"><{$nav_main}> <{$nav_sub}> (<{$nav_subcount}>)</td>
+  </tr>
+  <tr>
+    <td class="head"><{$submitter}><{if $istheir == "1"}>test<{/if}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+<{if $rate !='0'}><b><{$lang_user_rating}></b> <{$rating}> (<{$votes}>) - <a href="<{$xoops_url}>/modules/classifieds/rate-user.php?usid=<{$usid}>" rel="nofollow"><{$lang_ratethisuser}></a><{/if}>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+
+</td>
+  </tr>
+  <tr>
+    <td style="padding:0;">
+
+	<br><{$nav_page}><br>
+
+   	  <table border="0" cellpadding="0" cellspacing="0" style="width:99%;">
+        <tr>
+		  <{if $xoops_isadmin}><td class="head"></td><{/if}>
+	<td class="head"></td>
+	
+          <td class="head"><{$my_ads_head_title}></td>
+          <td align="center" class="head"><{$my_ads_head_price}></td>
+          <td align="center" class="head"><{$my_ads_head_date}></td>
+          <td class="head"><{$my_ads_head_local}></td>
+          <td align="center" class="head"><{$my_ads_head_views}></td>
+        </tr>
+        <{foreach item=item from=$items}>
+		<tr class=<{cycle values="odd,even"}>>
+		  <{if $xoops_isadmin}><td><{$item.admin}></td><{/if}>
+	<td align="right"><{$item.photo}></td>
+          <td><b><{$item.type}>: </b><{$item.title}></td>
+          <td align="center"><{$item.price}>&nbsp;<{$item.price_typeprice}></td>
+          <td align="center"><{$item.date}></td>
+          <td><{$item.local}></td>          
+          <td align="center"><{$item.views}></td>
+        </tr>
+
+		<{/foreach}>
+
+      </table>
+	</td>
+</tr><tr></tr>
+</table>
+<br><br><{$nav_page}><br><br>
+<div style="text-align: center; padding: 3px; margin:3px;">
+	<{$comments_head}>
+</div>
+<div style="text-align: center; padding: 3px; margin:3px;">
+  <{$commentsnav}>
+  <{$lang_notice}>
+</div>
+
+<div style="margin:3px; padding: 3px;">
+<!-- start comments loop -->
+<{if $comment_mode == "flat"}>
+  <{include file="db:system_comments_flat.html"}>
+<{elseif $comment_mode == "thread"}>
+  <{include file="db:system_comments_thread.html"}>
+<{elseif $comment_mode == "nest"}>
+  <{include file="db:system_comments_nest.html"}>
+<{/if}>
+<!-- end comments loop -->
+</div>
